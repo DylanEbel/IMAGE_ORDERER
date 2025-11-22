@@ -7,11 +7,11 @@ import os
 class CropTool:
     def __init__(self, root):
         self.root = root
-        self.root.title("Image Crop Tool - 600x800")
+        self.root.title("Image Crop Tool - 450x600")
         
         # Crop box dimensions (fixed)
-        self.crop_width = 600
-        self.crop_height = 800
+        self.crop_width = 450
+        self.crop_height = 600
         
         # Variables for image handling
         self.original_image = None
@@ -45,7 +45,7 @@ class CropTool:
         # Upload button
         self.upload_btn = tk.Button(
             top_frame, 
-            text=" Upload Image", 
+            text="📁 Upload Image", 
             command=self.upload_image,
             font=("Arial", 12, "bold"),
             bg="#4CAF50",
@@ -58,7 +58,7 @@ class CropTool:
         # Crop button
         self.crop_btn = tk.Button(
             top_frame,
-            text=" Crop & Save",
+            text="✂️ Crop & Save",
             command=self.crop_and_save,
             font=("Arial", 12, "bold"),
             bg="#2196F3",
@@ -364,4 +364,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
