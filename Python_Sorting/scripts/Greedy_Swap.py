@@ -3,7 +3,7 @@ import random
 
 class Greedy_Swap:
     def __init__(self, input_arr, target_arr):
-        self.iter = 10000
+        self.iter = 1000
         self.input_arr = input_arr
         self.target_arr = target_arr
 

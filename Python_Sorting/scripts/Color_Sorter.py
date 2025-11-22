@@ -10,14 +10,11 @@ class ColorSorter:
         self.height = height
         self.input = input
 
-        if not input:
-            self.GenInputArr()
-        else:
-            self.input_arr = self.GenArr(input)
-
+        self.GenInputArr()
         self.GenTargetArr()
 
-        self.algorithm: Greedy_Swap = Greedy_Swap(self.input_arr, self.target_arr)
+        self.output_arr.setflags(write=True)
+        self.algorithm: Greedy_Swap = Greedy_Swap(self.output_arr, self.target_arr)
 
     def GenTargetArr(self):
         path = Path(__file__).resolve().parent.parent / "targets" / f"{self.target}.jpg"
@@ -26,17 +23,23 @@ class ColorSorter:
         self.target_arr = self.GenArr(image)
 
     def GenInputArr(self):
-        self.input_arr = self.Random_Arr()
+        if self.input:
+            path = Path(__file__).resolve().parent.parent.parent / self.input
+
+            print(path)
+
+            image = Image.open(path)
+            self.input_arr = self.GenArr(image)
+            self.output_arr = np.array(self.input_arr, copy=True)
+        else:
+            self.input_arr = self.RandomArr()
+            self.output_arr = np.array(self.input_arr, copy=True)
 
     def Reset(self):      
-        if not self.input:
-            self.GenInputArr()
-        else:
-            self.input_arr = self.GenArr(self, self.input)
-    
-        self.algorithm.input_arr = self.input_arr
+        self.output_arr = np.array(self.input_arr, copy=True)
+        self.algorithm.input_arr = np.array(self.input_arr, dtype=np.uint8, copy=True, order="C")
 
-    def Random_Arr(self):
+    def RandomArr(self):
         return np.random.randint(0, 256, (self.height, self.width, 3), dtype=np.uint8)
 
     def GenArr(self, image):

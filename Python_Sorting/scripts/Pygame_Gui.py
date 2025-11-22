@@ -27,7 +27,7 @@ class Pygame_Gui:
         self.clock = pygame.time.Clock()
         
     def DisplayOutput(self):
-        arr = np.ascontiguousarray(self.colorSorter.input_arr)
+        arr = np.ascontiguousarray(self.colorSorter.output_arr)
         h, w = arr.shape[:2]
         return pygame.image.frombuffer(arr.tobytes(), (w,h), "RGB")
     
@@ -64,7 +64,7 @@ class Pygame_Gui:
                 self.colorSorter.Reset()
 
             if is_hovered_start and mouse_pressed[0]:
-                solving = not solving
+                solving = True
             
             if solving:
                 flips = self.colorSorter.Forward()
@@ -77,7 +77,7 @@ class Pygame_Gui:
 
             pygame.display.flip()
 
-            self.clock.tick(10)
+            self.clock.tick(60)
 
         pygame.quit()
         sys.exit()
